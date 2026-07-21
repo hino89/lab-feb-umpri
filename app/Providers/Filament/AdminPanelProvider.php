@@ -34,6 +34,14 @@ class AdminPanelProvider extends PanelProvider
             ->defaultThemeMode(\Filament\Enums\ThemeMode::Light)
             ->darkMode(false)
             ->brandLogo(fn () => view('components.logo'))
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::TOPBAR_START,
+                fn (): string => \Illuminate\Support\Facades\Blade::render('
+                    <div class="absolute inset-x-0 flex justify-center pointer-events-none">
+                        <span class="font-bold text-sm md:text-lg tracking-tight text-gray-800 dark:text-white hidden md:block">Laboratorium Fakultas Ekonomi dan Bisnis</span>
+                    </div>
+                ')
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

@@ -15,14 +15,17 @@
     <nav class="bg-primary text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Kiri (Kosong) -->
-                <div class="flex-1"></div>
+                <!-- Kiri (Logo) -->
+                <div class="flex-1 flex justify-start">
+                    <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
+                        <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto max-w-[150px] object-contain">
+                    </a>
+                </div>
                 
-                <!-- Tengah (Logo) -->
-                <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center justify-center gap-2">
-                    <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto object-contain">
+                <!-- Tengah (Teks) -->
+                <div class="flex-shrink-0 flex justify-center">
                     <span class="font-bold text-sm md:text-lg tracking-tight text-white hidden sm:block whitespace-nowrap">Laboratorium Fakultas Ekonomi dan Bisnis</span>
-                </a>
+                </div>
                 
                 <!-- Kanan (Login) -->
                 <div class="flex-1 flex justify-end">
