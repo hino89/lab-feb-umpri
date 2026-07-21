@@ -14,18 +14,19 @@
     <!-- Navbar -->
     <nav class="bg-primary text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center h-16 relative">
-                <!-- Logo Centered -->
-                <div class="absolute inset-x-0 flex justify-center pointer-events-none">
-                    <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2 pointer-events-auto">
-                        <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto object-contain">
-                        <span class="font-bold text-lg sm:text-xl tracking-tight text-white hidden md:block">Laboratorium Fakultas Ekonomi dan Bisnis</span>
-                    </a>
-                </div>
+            <div class="flex justify-between items-center h-16">
+                <!-- Kiri (Kosong) -->
+                <div class="flex-1"></div>
                 
-                <!-- Login Button Right -->
-                <div class="ml-auto flex items-center space-x-4 relative z-10">
-                    <a href="{{ route('filament.admin.auth.login') }}" class="text-sm text-gray-200 hover:text-white transition">Login Admin</a>
+                <!-- Tengah (Logo) -->
+                <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center justify-center gap-2">
+                    <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto object-contain">
+                    <span class="font-bold text-sm md:text-lg tracking-tight text-white hidden sm:block whitespace-nowrap">Laboratorium Fakultas Ekonomi dan Bisnis</span>
+                </a>
+                
+                <!-- Kanan (Login) -->
+                <div class="flex-1 flex justify-end">
+                    <a href="{{ route('filament.admin.auth.login') }}" class="text-sm text-gray-200 hover:text-white transition whitespace-nowrap">Login Admin</a>
                 </div>
             </div>
         </div>
