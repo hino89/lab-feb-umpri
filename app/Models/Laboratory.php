@@ -26,4 +26,14 @@ class Laboratory extends Model
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function getIsCurrentlyInUseAttribute()
+    {
+        $now = now();
+        return $this->bookings()
+            ->where('status', 'approved')
+            ->where('start_time', '<=', $now)
+            ->where('end_time', '>=', $now)
+            ->exists();
+    }
 }

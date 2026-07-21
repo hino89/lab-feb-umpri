@@ -21,6 +21,19 @@ class BookingController extends Controller
             'admin_notes' => 'nullable|string'
         ]);
 
+        if ($request->status === 'approved') {
+            $overlapping = Booking::where('laboratory_id', $booking->laboratory_id)
+                ->where('status', 'approved')
+                ->where('id', '!=', $booking->id)
+                ->where('start_time', '<', $booking->end_time)
+                ->where('end_time', '>', $booking->start_time)
+                ->exists();
+
+            if ($overlapping) {
+                return back()->with('error', 'Gagal menyetujui: Jadwal bentrok dengan peminjaman lain yang sudah disetujui.');
+            }
+        }
+
         $booking->update([
             'status' => $request->status,
             'admin_notes' => $request->admin_notes

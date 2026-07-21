@@ -43,14 +43,9 @@ class PublicController extends Controller
         // Check double booking
         $overlapping = Booking::where('laboratory_id', $id)
             ->where('status', 'approved')
-            ->where(function ($query) use ($start_datetime, $end_datetime) {
-                $query->whereBetween('start_time', [$start_datetime, $end_datetime])
-                      ->orWhereBetween('end_time', [$start_datetime, $end_datetime])
-                      ->orWhere(function ($q) use ($start_datetime, $end_datetime) {
-                          $q->where('start_time', '<=', $start_datetime)
-                            ->where('end_time', '>=', $end_datetime);
-                      });
-            })->exists();
+            ->where('start_time', '<', $end_datetime)
+            ->where('end_time', '>', $start_datetime)
+            ->exists();
 
         if ($overlapping) {
             return back()->with('error', 'Jadwal tidak tersedia di waktu tersebut (sudah ada yang booking).')->withInput();

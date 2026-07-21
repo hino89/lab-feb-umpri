@@ -11,7 +11,21 @@
     <!-- Lab Info (Left side, takes 2 cols) -->
     <div class="lg:col-span-2 space-y-6">
         <div class="bg-white rounded-lg shadow-sm border p-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $laboratory->name }}</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $laboratory->name }}</h1>
+            
+            <div class="mb-6">
+                @if($laboratory->is_currently_in_use)
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-700 border border-red-100">
+                        <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Status: Sedang Digunakan
+                    </span>
+                @else
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Status: Tersedia
+                    </span>
+                @endif
+            </div>
             
             @if($laboratory->images->count() > 0)
                 <div class="flex overflow-x-auto gap-4 mb-6 pb-2 snap-x">
