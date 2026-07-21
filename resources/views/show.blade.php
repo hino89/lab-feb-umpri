@@ -51,16 +51,15 @@
                         <p class="leading-relaxed text-gray-700">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
                     </div>
 
-                    <!-- Kapasitas dan Lokasi di kotak khusus -->
-                    <div class="bg-gray-50 rounded-xl p-5 border flex items-center justify-around shadow-inner mt-auto">
-                        <div class="text-center">
+                    <!-- Kapasitas dan Lokasi -->
+                    <div class="flex gap-10 mt-auto pt-4">
+                        <div>
                             <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
-                            <span class="font-extrabold text-2xl text-primary">{{ $laboratory->capacity }} <span class="text-base font-medium text-gray-500">Orang</span></span>
+                            <span class="font-medium text-gray-900 text-lg">{{ $laboratory->capacity }} Orang</span>
                         </div>
-                        <div class="w-px h-12 bg-gray-300"></div>
-                        <div class="text-center">
+                        <div>
                             <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Lokasi</span>
-                            <span class="font-bold text-lg text-gray-800">{{ $laboratory->location ?? '-' }}</span>
+                            <span class="font-medium text-gray-900 text-lg">{{ $laboratory->location ?? '-' }}</span>
                         </div>
                     </div>
                 </div>
