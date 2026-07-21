@@ -14,14 +14,17 @@
     <!-- Navbar -->
     <nav class="bg-primary text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2">
+            <div class="flex items-center h-16 relative">
+                <!-- Logo Centered -->
+                <div class="absolute inset-x-0 flex justify-center pointer-events-none">
+                    <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2 pointer-events-auto">
                         <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto object-contain">
-                        <span class="font-bold text-xl tracking-tight text-white">Lab FEB UMPRI</span>
+                        <span class="font-bold text-lg sm:text-xl tracking-tight text-white hidden md:block">Laboratorium Fakultas Ekonomi dan Bisnis</span>
                     </a>
                 </div>
-                <div class="flex items-center space-x-4">
+                
+                <!-- Login Button Right -->
+                <div class="ml-auto flex items-center space-x-4 relative z-10">
                     <a href="{{ route('filament.admin.auth.login') }}" class="text-sm text-gray-200 hover:text-white transition">Login Admin</a>
                 </div>
             </div>
