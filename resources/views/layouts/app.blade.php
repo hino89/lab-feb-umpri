@@ -17,7 +17,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2">
-                        <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-10 w-auto object-contain">
+                        <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-8 w-auto object-contain">
                         <span class="font-bold text-xl tracking-tight text-white">Lab FEB UMPRI</span>
                     </a>
                 </div>
