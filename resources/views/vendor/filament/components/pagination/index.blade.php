@@ -48,9 +48,9 @@
                     'filament::components/pagination.overview',
                     $paginator->total(),
                     [
-                        'first' => \Illuminate\Support\Number::format($paginator->firstItem() ?? 0),
-                        'last' => \Illuminate\Support\Number::format($paginator->lastItem() ?? 0),
-                        'total' => \Illuminate\Support\Number::format($paginator->total()),
+                        'first' => number_format($paginator->firstItem() ?? 0),
+                        'last' => number_format($paginator->lastItem() ?? 0),
+                        'total' => number_format($paginator->total()),
                     ],
                 )
             }}
@@ -160,8 +160,8 @@
                     @foreach ($element as $page => $url)
                         <x-filament::pagination.item
                             :active="$page === $paginator->currentPage()"
-                            :aria-label="trans_choice('filament::components/pagination.actions.go_to_page.label', $page, ['page' => \Illuminate\Support\Number::format($page)])"
-                            :label="\Illuminate\Support\Number::format($page)"
+                            :aria-label="trans_choice('filament::components/pagination.actions.go_to_page.label', $page, ['page' => number_format($page)])"
+                            :label="number_format($page)"
                             :wire:click="'gotoPage(' . $page . ', \'' . $paginator->getPageName() . '\')'"
                             :wire:key="$this->getId() . '.pagination.' . $paginator->getPageName() . '.' . $page"
                         />
