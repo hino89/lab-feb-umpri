@@ -52,7 +52,7 @@
                     </div>
 
                     <!-- Kapasitas dan Lokasi -->
-                    <div class="flex gap-10 mt-auto pt-4">
+                    <div class="grid grid-cols-2 gap-6 mt-auto pt-4">
                         <div>
                             <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
                             <span class="font-medium text-gray-900 text-lg">{{ $laboratory->capacity }} Orang</span>
