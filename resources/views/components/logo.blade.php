@@ -1,4 +1,5 @@
 <div class="flex items-center gap-2">
-    <div class="w-8 h-8 bg-blue-900 rounded-full flex items-center justify-center text-white font-bold">L</div>
+    <!-- Memanggil gambar dari public/images/header_logo.png -->
+    <img src="{{ asset('images/header_logo.png') }}" alt="Logo UMPRI" class="h-10 w-auto object-contain">
     <span class="font-bold text-xl tracking-tight text-blue-900 dark:text-white">Lab FEB UMPRI</span>
 </div>
