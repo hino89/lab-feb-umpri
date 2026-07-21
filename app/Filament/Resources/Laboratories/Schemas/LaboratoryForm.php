@@ -20,7 +20,6 @@ class LaboratoryForm
                 TextInput::make('location'),
                 TextInput::make('capacity')
                     ->required()
-                    ->numeric()
                     ->default(0),
                 Textarea::make('facilities')
                     ->columnSpanFull(),
