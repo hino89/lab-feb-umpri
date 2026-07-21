@@ -1,24 +1,24 @@
 @import "tailwindcss"; 
 @theme { --color-primary: #1E3A8A; }
 
-/* Thin custom scrollbar */
-.custom-scrollbar {
+/* Thin custom scrollbar globally */
+html, body, .custom-scrollbar {
     /* Firefox support */
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 6px;
     height: 8px;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: transparent;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #cbd5e1;
     border-radius: 10px;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: #94a3b8;
 }
