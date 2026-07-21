@@ -17,9 +17,9 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2">
-                        <!-- Placeholder for Logo -->
+                        <!-- TODO: GANTI DENGAN LOGO DAN TEKS UMPRI -->
                         <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-primary font-bold">L</div>
-                        <span class="font-bold text-xl tracking-tight">Lab FEB UMPRI</span>
+                        <span class="font-bold text-xl tracking-tight text-white">Lab FEB UMPRI</span>
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">

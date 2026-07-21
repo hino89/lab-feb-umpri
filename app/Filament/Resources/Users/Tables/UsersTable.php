@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Laboratories\Tables;
+namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class LaboratoriesTable
+class UsersTable
 {
     public static function configure(Table $table): Table
     {
@@ -17,12 +16,13 @@ class LaboratoriesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('location')
+                TextColumn::make('email')
+                    ->label('Email address')
                     ->searchable(),
-                TextColumn::make('capacity')
+                TextColumn::make('email_verified_at')
                     ->sortable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
+                TextColumn::make('role')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -44,11 +44,9 @@ class ImagesRelationManager extends RelationManager
                 IconColumn::make('is_primary')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

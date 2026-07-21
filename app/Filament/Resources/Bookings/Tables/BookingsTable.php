@@ -15,7 +15,6 @@ class BookingsTable
         return $table
             ->columns([
                 TextColumn::make('laboratory_id')
-                    ->numeric()
                     ->sortable(),
                 TextColumn::make('booker_name')
                     ->searchable(),
@@ -24,19 +23,15 @@ class BookingsTable
                 TextColumn::make('booker_type')
                     ->searchable(),
                 TextColumn::make('start_time')
-                    ->dateTime()
                     ->sortable(),
                 TextColumn::make('end_time')
-                    ->dateTime()
                     ->sortable(),
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
