@@ -1,0 +1,127 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="mb-6 flex items-center">
+    <a href="{{ route('home') }}" class="text-primary hover:underline flex items-center gap-1">
+        &larr; Kembali ke Daftar Lab
+    </a>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Lab Info (Left side, takes 2 cols) -->
+    <div class="lg:col-span-2 space-y-6">
+        <div class="bg-white rounded-lg shadow-sm border p-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $laboratory->name }}</h1>
+            
+            @if($laboratory->images->count() > 0)
+                <div class="flex overflow-x-auto gap-4 mb-6 pb-2 snap-x">
+                    @foreach($laboratory->images as $img)
+                        <img src="{{ Storage::url($img->image_path) }}" alt="Foto Lab" class="h-64 object-cover rounded-lg snap-center shrink-0">
+                    @endforeach
+                </div>
+            @endif
+
+            <div class="prose max-w-none text-gray-600">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Deskripsi</h3>
+                <p>{{ $laboratory->description ?? '-' }}</p>
+
+                <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-2">Fasilitas</h3>
+                <p>{{ $laboratory->facilities ?? '-' }}</p>
+
+                <div class="mt-6 flex gap-6">
+                    <div>
+                        <span class="block text-sm text-gray-500">Kapasitas</span>
+                        <span class="font-medium text-gray-900">{{ $laboratory->capacity }} Orang</span>
+                    </div>
+                    <div>
+                        <span class="block text-sm text-gray-500">Lokasi</span>
+                        <span class="font-medium text-gray-900">{{ $laboratory->location ?? '-' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Jadwal Penggunaan (Approved)</h3>
+            @if($laboratory->bookings->isEmpty())
+                <p class="text-gray-500 italic">Belum ada jadwal penggunaan yang disetujui.</p>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peminjam</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keperluan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($laboratory->bookings as $booking)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    {{ \Carbon\Carbon::parse($booking->start_time)->format('d M Y H:i') }} - <br>
+                                    {{ \Carbon\Carbon::parse($booking->end_time)->format('d M Y H:i') }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    {{ $booking->booker_name }} <span class="text-gray-500 text-xs">({{ ucfirst($booking->booker_type) }})</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                    {{ $booking->purpose }}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Booking Form (Right side, takes 1 col) -->
+    <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-sm border p-6 sticky top-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Ajukan Booking</h3>
+            <form action="{{ route('lab.book', $laboratory->id) }}" method="POST" class="space-y-4">
+                @csrf
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input type="text" name="booker_name" value="{{ old('booker_name') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">NIM / NIDN</label>
+                    <input type="text" name="booker_id" value="{{ old('booker_id') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                    <select name="booker_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2 bg-white">
+                        <option value="mahasiswa" {{ old('booker_type') == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
+                        <option value="dosen" {{ old('booker_type') == 'dosen' ? 'selected' : '' }}>Dosen</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
+                    <input type="datetime-local" name="start_time" value="{{ old('start_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Waktu Selesai</label>
+                    <input type="datetime-local" name="end_time" value="{{ old('end_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Keperluan (Mata Kuliah / Acara)</label>
+                    <textarea name="purpose" rows="3" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">{{ old('purpose') }}</textarea>
+                </div>
+
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition">
+                    Submit Booking
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
