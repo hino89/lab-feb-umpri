@@ -24,7 +24,7 @@
                 
                 <!-- Tengah (Teks) -->
                 <div class="flex-shrink-0 flex justify-center">
-                    <span class="font-bold text-sm md:text-lg tracking-tight text-white hidden sm:block whitespace-nowrap">Laboratorium Fakultas Ekonomi dan Bisnis</span>
+                    <span class="font-bold text-lg md:text-lg tracking-tight text-white sm:block whitespace-nowrap">Laboratorium Fakultas Ekonomi dan Bisnis</span>
                 </div>
                 
                 <!-- Kanan (Login) -->
