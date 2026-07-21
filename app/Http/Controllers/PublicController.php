@@ -29,22 +29,26 @@ class PublicController extends Controller
             'booker_name' => 'required|string|max:255',
             'booker_id' => 'required|string|max:255',
             'booker_type' => 'required|in:mahasiswa,dosen',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
+            'booking_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'purpose' => 'required|string',
         ]);
 
         $laboratory = Laboratory::findOrFail($id);
 
+        $start_datetime = $request->booking_date . ' ' . $request->start_time . ':00';
+        $end_datetime = $request->booking_date . ' ' . $request->end_time . ':00';
+
         // Check double booking
         $overlapping = Booking::where('laboratory_id', $id)
             ->where('status', 'approved')
-            ->where(function ($query) use ($request) {
-                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
-                      ->orWhereBetween('end_time', [$request->start_time, $request->end_time])
-                      ->orWhere(function ($q) use ($request) {
-                          $q->where('start_time', '<=', $request->start_time)
-                            ->where('end_time', '>=', $request->end_time);
+            ->where(function ($query) use ($start_datetime, $end_datetime) {
+                $query->whereBetween('start_time', [$start_datetime, $end_datetime])
+                      ->orWhereBetween('end_time', [$start_datetime, $end_datetime])
+                      ->orWhere(function ($q) use ($start_datetime, $end_datetime) {
+                          $q->where('start_time', '<=', $start_datetime)
+                            ->where('end_time', '>=', $end_datetime);
                       });
             })->exists();
 
@@ -57,8 +61,8 @@ class PublicController extends Controller
             'booker_name' => $request->booker_name,
             'booker_id' => $request->booker_id,
             'booker_type' => $request->booker_type,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
+            'start_time' => $start_datetime,
+            'end_time' => $end_datetime,
             'purpose' => $request->purpose,
             'status' => 'pending',
         ]);

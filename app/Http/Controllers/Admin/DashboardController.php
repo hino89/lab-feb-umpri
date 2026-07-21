@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $totalLabs = Laboratory::count();
         $totalBookings = Booking::count();
         $totalUsers = User::count();
-        $recentBookings = Booking::with(['user', 'laboratory'])->latest()->take(5)->get();
+        $recentBookings = Booking::with(['laboratory'])->latest()->take(5)->get();
         
         return view('admin.dashboard', compact('totalLabs', 'totalBookings', 'totalUsers', 'recentBookings'));
     }

@@ -29,11 +29,14 @@
                 
                 <!-- Kanan (Login) -->
                 <div class="flex-1 flex justify-end">
-                    <a href="{{ route('filament.admin.auth.login') }}" class="text-sm text-gray-200 hover:text-white transition whitespace-nowrap">Login Admin</a>
+                    <a href="{{ route('admin.login') }}" class="text-sm text-gray-200 hover:text-white transition whitespace-nowrap">Login Admin</a>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Hero Section -->
+    @yield('hero')
 
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">

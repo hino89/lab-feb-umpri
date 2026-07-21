@@ -103,13 +103,20 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
-                    <input type="datetime-local" name="start_time" value="{{ old('start_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                    <label class="block text-sm font-medium text-gray-700">Tanggal Penggunaan</label>
+                    <input type="date" name="booking_date" value="{{ old('booking_date') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Waktu Selesai</label>
-                    <input type="datetime-local" name="end_time" value="{{ old('end_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Jam Mulai (24H)</label>
+                        <input type="time" name="start_time" value="{{ old('start_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Jam Selesai (24H)</label>
+                        <input type="time" name="end_time" value="{{ old('end_time') }}" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border px-3 py-2">
+                    </div>
                 </div>
 
                 <div>
