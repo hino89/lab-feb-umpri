@@ -10,46 +10,58 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Lab Info (Left side, takes 2 cols) -->
     <div class="lg:col-span-2 space-y-6">
-        <div class="bg-white rounded-lg shadow-sm border p-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $laboratory->name }}</h1>
-            
-            <div class="mb-6">
-                @if($laboratory->is_currently_in_use)
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-700 border border-red-100">
-                        <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Status: Sedang Digunakan
-                    </span>
-                @else
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Status: Tersedia
-                    </span>
-                @endif
+        <div class="bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">{{ $laboratory->name }}</h1>
+                
+                <div class="shrink-0 mt-1">
+                    @if($laboratory->is_currently_in_use)
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-red-50 text-red-700 border border-red-200 shadow-sm">
+                            <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Sedang Digunakan
+                        </span>
+                    @else
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Tersedia
+                        </span>
+                    @endif
+                </div>
             </div>
             
             @if($laboratory->images->count() > 0)
-                <div class="flex overflow-x-auto gap-4 mb-6 pb-2 snap-x">
+                <div class="flex overflow-x-auto gap-4 mb-8 pb-4 snap-x">
                     @foreach($laboratory->images as $img)
-                        <img src="{{ Storage::url($img->image_path) }}" alt="Foto Lab" class="h-64 object-cover rounded-lg snap-center shrink-0">
+                        <img src="{{ Storage::url($img->image_path) }}" alt="Foto Lab" class="h-[400px] w-full md:w-auto object-cover rounded-xl snap-center shrink-0 shadow-sm">
                     @endforeach
                 </div>
             @endif
 
-            <div class="prose max-w-none text-gray-600">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Deskripsi</h3>
-                <p>{{ $laboratory->description ?? '-' }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600">
+                <!-- Kiri: Deskripsi -->
+                <div class="space-y-3">
+                    <h3 class="text-xl font-bold text-gray-900 border-b pb-2">Deskripsi</h3>
+                    <p class="leading-relaxed text-gray-700 text-lg">{{ $laboratory->description ?? 'Tidak ada deskripsi.' }}</p>
+                </div>
 
-                <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-2">Fasilitas</h3>
-                <p>{{ $laboratory->facilities ?? '-' }}</p>
-
-                <div class="mt-6 flex gap-6">
-                    <div>
-                        <span class="block text-sm text-gray-500">Kapasitas</span>
-                        <span class="font-medium text-gray-900">{{ $laboratory->capacity }} Orang</span>
+                <!-- Kanan: Fasilitas & Detail -->
+                <div class="flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <h3 class="text-xl font-bold text-gray-900 border-b pb-2">Fasilitas</h3>
+                        <p class="leading-relaxed text-gray-700">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
                     </div>
-                    <div>
-                        <span class="block text-sm text-gray-500">Lokasi</span>
-                        <span class="font-medium text-gray-900">{{ $laboratory->location ?? '-' }}</span>
+
+                    <!-- Kapasitas dan Lokasi di kotak khusus -->
+                    <div class="bg-gray-50 rounded-xl p-5 border flex items-center justify-around shadow-inner mt-auto">
+                        <div class="text-center">
+                            <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
+                            <span class="font-extrabold text-2xl text-primary">{{ $laboratory->capacity }} <span class="text-base font-medium text-gray-500">Orang</span></span>
+                        </div>
+                        <div class="w-px h-12 bg-gray-300"></div>
+                        <div class="text-center">
+                            <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Lokasi</span>
+                            <span class="font-bold text-lg text-gray-800">{{ $laboratory->location ?? '-' }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
