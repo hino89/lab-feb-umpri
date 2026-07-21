@@ -2,6 +2,12 @@
 @theme { --color-primary: #1E3A8A; }
 
 /* Thin custom scrollbar */
+.custom-scrollbar {
+    /* Firefox support */
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 8px;
