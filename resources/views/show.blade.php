@@ -29,13 +29,56 @@
                 </div>
             </div>
             
-            @if($laboratory->images->count() > 0)
-                <div class="flex overflow-x-auto gap-4 mb-8 pb-4 snap-x">
+            <div x-data="{
+                lightboxOpen: false,
+                activeImageIndex: 0,
+                images: [
                     @foreach($laboratory->images as $img)
-                        <img src="{{ Storage::url($img->image_path) }}" alt="Foto Lab" class="h-[400px] w-full md:w-auto object-cover rounded-xl snap-center shrink-0 shadow-sm">
+                        '{{ Storage::url($img->image_path) }}',
                     @endforeach
+                ],
+                next() {
+                    this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+                },
+                prev() {
+                    this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
+                }
+            }">
+                @if($laboratory->images->count() > 0)
+                    <div class="flex overflow-x-auto custom-scrollbar gap-4 mb-8 pb-4 snap-x">
+                        @foreach($laboratory->images as $index => $img)
+                            <img @click="activeImageIndex = {{ $index }}; lightboxOpen = true" src="{{ Storage::url($img->image_path) }}" alt="Foto Lab" class="cursor-pointer h-[400px] w-full md:w-auto object-cover rounded-xl snap-center shrink-0 shadow-sm hover:opacity-90 transition">
+                        @endforeach
+                    </div>
+                @endif
+
+                <!-- Lightbox Modal -->
+                <div x-show="lightboxOpen" style="display: none" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm" @keydown.escape.window="lightboxOpen = false" @keydown.right.window="if(lightboxOpen) next()" @keydown.left.window="if(lightboxOpen) prev()">
+                    
+                    <!-- Close btn -->
+                    <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-white/70 hover:text-white transition">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+
+                    <!-- Prev btn -->
+                    <button @click.stop="prev()" class="absolute left-4 md:left-10 text-white/50 hover:text-white transition p-3 bg-black/50 rounded-full">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+
+                    <!-- Image -->
+                    <img :src="images[activeImageIndex]" class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl" @click.stop="">
+
+                    <!-- Next btn -->
+                    <button @click.stop="next()" class="absolute right-4 md:right-10 text-white/50 hover:text-white transition p-3 bg-black/50 rounded-full">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    
+                    <!-- Image Counter -->
+                    <div class="absolute bottom-6 text-white/70 font-medium tracking-widest text-sm">
+                        <span x-text="activeImageIndex + 1"></span> / <span x-text="images.length"></span>
+                    </div>
                 </div>
-            @endif
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600">
                 <!-- Kiri: Deskripsi -->
