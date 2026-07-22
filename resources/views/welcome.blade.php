@@ -24,17 +24,17 @@
             $hero3 = $hero3Files->first() ? Storage::url($hero3Files->first()) : 'https://placehold.co/800x1200/312e81/ffffff?text=Lab+3';
         @endphp
         <!-- Block 1 (Left) -->
-        <div class="absolute top-0 bottom-0 -left-[10%] w-[43.5%] transform -skew-x-[12deg] border-r-2 border-white/90 shadow-[1px_0_2px_rgba(255,255,255,0.3)] overflow-hidden z-30">
+        <div class="absolute top-0 bottom-0 -left-[10%] w-[43.5%] transform -skew-x-[12deg] border-r-2 border-white/90 shadow-[1px_0_2px_rgba(255,255,255,0.3)] overflow-hidden z-[3]">
             <img src="{{ $hero1 }}" alt="Lab 1" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] ml-[10%]">
             <div class="absolute inset-0 bg-black/50 hover:bg-black/30 transition-colors duration-500"></div>
         </div>
         <!-- Block 2 (Center) -->
-        <div class="absolute top-0 bottom-0 left-[33%] w-[34%] transform -skew-x-[12deg] border-r-2 border-white/90 shadow-[1px_0_2px_rgba(255,255,255,0.3)] overflow-hidden z-20">
+        <div class="absolute top-0 bottom-0 left-[33%] w-[34%] transform -skew-x-[12deg] border-r-2 border-white/90 shadow-[1px_0_2px_rgba(255,255,255,0.3)] overflow-hidden z-[2]">
             <img src="{{ $hero2 }}" alt="Lab 2" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-125">
             <div class="absolute inset-0 bg-black/50 hover:bg-black/30 transition-colors duration-500"></div>
         </div>
         <!-- Block 3 (Right) -->
-        <div class="absolute top-0 bottom-0 left-[66.5%] w-[43.5%] transform -skew-x-[12deg] overflow-hidden z-10">
+        <div class="absolute top-0 bottom-0 left-[66.5%] w-[43.5%] transform -skew-x-[12deg] overflow-hidden z-[1]">
             <img src="{{ $hero3 }}" alt="Lab 3" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] -ml-[10%]">
             <div class="absolute inset-0 bg-black/50 hover:bg-black/30 transition-colors duration-500"></div>
         </div>
