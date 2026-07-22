@@ -109,45 +109,70 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-sm border p-6">
+        <div class="bg-white rounded-lg shadow-sm border p-6" x-data="{
+            selectedDate: '{{ $dateFilter }}',
+            isLoading: false,
+            async updateBookings() {
+                this.isLoading = true;
+                try {
+                    const response = await fetch('{{ route('lab.show', $laboratory->id) }}?date=' + this.selectedDate);
+                    const html = await response.text();
+                    const doc = new DOMParser().parseFromString(html, 'text/html');
+                    const newTable = doc.getElementById('booking-table-wrapper');
+                    document.getElementById('booking-table-wrapper').innerHTML = newTable.innerHTML;
+                } catch (e) {
+                    console.error('Gagal mengambil data jadwal', e);
+                } finally {
+                    this.isLoading = false;
+                }
+            }
+        }">
             <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
                 <h3 class="text-xl font-bold text-gray-900">Jadwal Penggunaan (Approved)</h3>
-                <form action="{{ route('lab.show', $laboratory->id) }}" method="GET" class="flex items-center gap-2">
+                <div class="flex items-center gap-2">
                     <label class="text-sm text-gray-600 font-medium">Filter Tanggal:</label>
-                    <input type="date" name="date" value="{{ $dateFilter }}" class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-primary focus:border-primary px-3 py-1.5 border" onchange="this.form.submit()">
-                </form>
-            </div>
-            @if($laboratory->bookings->isEmpty())
-                <p class="text-gray-500 italic">Belum ada jadwal penggunaan yang disetujui.</p>
-            @else
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peminjam</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keperluan</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($laboratory->bookings as $booking)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ \Carbon\Carbon::parse($booking->start_time)->format('d M Y H:i') }} - <br>
-                                    {{ \Carbon\Carbon::parse($booking->end_time)->format('d M Y H:i') }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $booking->booker_name }} <span class="text-gray-500 text-xs">({{ ucfirst($booking->booker_type) }})</span>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-900">
-                                    {{ $booking->purpose }}
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <input type="date" x-model="selectedDate" @change="updateBookings()" class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-primary focus:border-primary px-3 py-1.5 border transition">
                 </div>
-            @endif
+            </div>
+            
+            <div id="booking-table-wrapper" class="relative min-h-[100px]">
+                <!-- Loading overlay -->
+                <div x-show="isLoading" style="display: none;" class="absolute inset-0 bg-white/70 backdrop-blur-[1px] flex items-center justify-center z-10 rounded">
+                    <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </div>
+
+                @if($laboratory->bookings->isEmpty())
+                    <p class="text-gray-500 italic">Belum ada jadwal penggunaan yang disetujui pada tanggal tersebut.</p>
+                @else
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peminjam</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keperluan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach($laboratory->bookings as $booking)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ \Carbon\Carbon::parse($booking->start_time)->format('H:i') }} - 
+                                        {{ \Carbon\Carbon::parse($booking->end_time)->format('H:i') }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $booking->booker_name }} <span class="text-gray-500 text-xs">({{ ucfirst($booking->booker_type) }})</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        {{ $booking->purpose }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 
