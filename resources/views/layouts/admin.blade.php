@@ -31,6 +31,11 @@
                 <svg class="w-5 h-5 text-blue-300 opacity-80 group-hover:scale-125 group-hover:opacity-100 group-hover:text-white transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 <span class="font-medium">Pengguna</span>
             </a>
+            <div class="my-2 border-t border-blue-800/50"></div>
+            <a href="{{ route('admin.settings.hero') }}" class="group flex items-center gap-4 px-6 py-3 hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.settings.hero') ? 'bg-blue-800 border-r-4 border-blue-300' : 'border-r-4 border-transparent' }}">
+                <svg class="w-5 h-5 text-blue-300 opacity-80 group-hover:scale-125 group-hover:opacity-100 group-hover:text-white transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span class="font-medium">Pengaturan Beranda</span>
+            </a>
         </nav>
     </aside>
 

@@ -13,19 +13,29 @@
 <div class="relative w-full h-[calc(100vh-4rem)] bg-gray-900 overflow-hidden flex items-center justify-center">
     <!-- Diagonal 3-split background with placeholders and thin white lines -->
     <div class="absolute inset-0 overflow-hidden bg-black">
+        @php
+            $hero1Files = collect(Storage::disk('public')->files('hero'))->filter(fn($f) => str_starts_with(basename($f), '1.'));
+            $hero1 = $hero1Files->first() ? Storage::url($hero1Files->first()) : 'https://placehold.co/800x1200/1e3a8a/ffffff?text=Lab+1';
+            
+            $hero2Files = collect(Storage::disk('public')->files('hero'))->filter(fn($f) => str_starts_with(basename($f), '2.'));
+            $hero2 = $hero2Files->first() ? Storage::url($hero2Files->first()) : 'https://placehold.co/800x1200/1d4ed8/ffffff?text=Lab+2';
+            
+            $hero3Files = collect(Storage::disk('public')->files('hero'))->filter(fn($f) => str_starts_with(basename($f), '3.'));
+            $hero3 = $hero3Files->first() ? Storage::url($hero3Files->first()) : 'https://placehold.co/800x1200/312e81/ffffff?text=Lab+3';
+        @endphp
         <!-- Block 1 (Left) -->
         <div class="absolute top-0 bottom-0 -left-[20%] w-[53.33%] transform -skew-x-[12deg] border-r-[1.5px] border-white/80 overflow-hidden z-10">
-            <img src="https://placehold.co/800x1200/1e3a8a/ffffff?text=Lab+1" alt="Lab 1" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] ml-[10%]">
+            <img src="{{ $hero1 }}" alt="Lab 1" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] ml-[10%]">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
         <!-- Block 2 (Center) -->
         <div class="absolute top-0 bottom-0 left-[33.33%] w-[33.34%] transform -skew-x-[12deg] border-r-[1.5px] border-white/80 overflow-hidden z-10">
-            <img src="https://placehold.co/800x1200/1d4ed8/ffffff?text=Lab+2" alt="Lab 2" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-125">
+            <img src="{{ $hero2 }}" alt="Lab 2" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-125">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
         <!-- Block 3 (Right) -->
         <div class="absolute top-0 bottom-0 left-[66.67%] w-[53.33%] transform -skew-x-[12deg] overflow-hidden z-10">
-            <img src="https://placehold.co/800x1200/312e81/ffffff?text=Lab+3" alt="Lab 3" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] -ml-[10%]">
+            <img src="{{ $hero3 }}" alt="Lab 3" class="absolute inset-0 w-full h-full object-cover transform skew-x-[12deg] scale-[1.35] -ml-[10%]">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
     </div>
