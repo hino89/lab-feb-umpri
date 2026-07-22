@@ -16,7 +16,6 @@
                 <tr class="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
                     <th class="px-6 py-3 font-medium">Nama</th>
                     <th class="px-6 py-3 font-medium">Email</th>
-                    <th class="px-6 py-3 font-medium">Role</th>
                     <th class="px-6 py-3 font-medium">Bergabung Pada</th>
                     <th class="px-6 py-3 font-medium text-right">Aksi</th>
                 </tr>
@@ -26,13 +25,6 @@
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-6 py-4 text-sm text-gray-800 font-medium">{{ $user->name }}</td>
                     <td class="px-6 py-4 text-sm text-gray-500">{{ $user->email }}</td>
-                    <td class="px-6 py-4 text-sm">
-                        @if($user->role === 'admin')
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Administrator</span>
-                        @else
-                            <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">Pengguna</span>
-                        @endif
-                    </td>
                     <td class="px-6 py-4 text-sm text-gray-500">{{ $user->created_at->format('d M Y') }}</td>
                     <td class="px-6 py-4 text-sm text-right flex justify-end gap-3">
                         <a href="{{ route('admin.users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-900 font-medium flex items-center gap-1">

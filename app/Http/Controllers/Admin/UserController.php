@@ -27,13 +27,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:admin,user',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['role'] = 'admin'; // Force role to admin
         User::create($validated);
 
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil ditambahkan.');
+        return redirect()->route('admin.users.index')->with('success', 'Admin berhasil ditambahkan.');
     }
 
     public function edit(User $user)
@@ -47,7 +47,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8|confirmed',
-            'role' => 'required|in:admin,user',
         ]);
 
         if (!empty($validated['password'])) {
@@ -56,9 +55,10 @@ class UserController extends Controller
             unset($validated['password']);
         }
 
+        $validated['role'] = 'admin'; // Force role to admin
         $user->update($validated);
 
-        return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
+        return redirect()->route('admin.users.index')->with('success', 'Data admin berhasil diperbarui.');
     }
 
     public function destroy(User $user)
