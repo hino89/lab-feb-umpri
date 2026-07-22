@@ -18,12 +18,12 @@
                     @if($laboratory->is_currently_in_use)
                         <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-red-50 text-red-700 border border-red-200 shadow-sm">
                             <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Sedang Digunakan
+                            Lab sedang dipakai
                         </span>
                     @else
                         <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Tersedia
+                            Tersedia saat ini
                         </span>
                     @endif
                 </div>
@@ -110,7 +110,13 @@
         </div>
 
         <div class="bg-white rounded-lg shadow-sm border p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Jadwal Penggunaan (Approved)</h3>
+            <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
+                <h3 class="text-xl font-bold text-gray-900">Jadwal Penggunaan (Approved)</h3>
+                <form action="{{ route('lab.show', $laboratory->id) }}" method="GET" class="flex items-center gap-2">
+                    <label class="text-sm text-gray-600 font-medium">Filter Tanggal:</label>
+                    <input type="date" name="date" value="{{ $dateFilter }}" class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-primary focus:border-primary px-3 py-1.5 border" onchange="this.form.submit()">
+                </form>
+            </div>
             @if($laboratory->bookings->isEmpty())
                 <p class="text-gray-500 italic">Belum ada jadwal penggunaan yang disetujui.</p>
             @else

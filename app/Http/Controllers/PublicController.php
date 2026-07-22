@@ -14,13 +14,17 @@ class PublicController extends Controller
         return view('welcome', compact('laboratories'));
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $laboratory = Laboratory::with(['images', 'bookings' => function($q) {
-            $q->where('status', 'approved')->orderBy('start_time');
+        $dateFilter = $request->get('date', now()->format('Y-m-d'));
+
+        $laboratory = Laboratory::with(['images', 'bookings' => function($q) use ($dateFilter) {
+            $q->where('status', 'approved')
+              ->whereDate('start_time', $dateFilter)
+              ->orderBy('start_time', 'desc');
         }])->findOrFail($id);
 
-        return view('show', compact('laboratory'));
+        return view('show', compact('laboratory', 'dateFilter'));
     }
 
     public function storeBooking(Request $request, $id)
