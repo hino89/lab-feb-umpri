@@ -18,28 +18,28 @@ class LabSeeder extends Seeder
 
         Laboratory::create([
             'name' => 'Laboratorium Keuangan (Tax Center & Disabilitas)',
-            'location' => 'Gedung FEB UMPRI',
+            'location' => 'Lantai 3 Gedung FEB UMPRI',
             'capacity' => 25,
-            'description' => "Konsep: Accessible & Professional (Co-Working & Living Space)\n\nRuangan ini memiliki sirkulasi udara dan ruang gerak yang luas (ramah kursi roda) untuk Unit Layanan Disabilitas, namun tetap memiliki sudut profesional untuk konsultasi pajak.\n\nPembagian Area:\n- Zona Formal: Menggunakan kursi dan papan tulis yang sudah ada untuk materi, rapat, atau kerja fokus.\n- Zona Kolaborasi (Lesehan): Area santai menggunakan karpet dan bean bags untuk diskusi dan bedah kasus keuangan.",
-            'facilities' => "Fasilitas & Penunjang:\n- Area Tax Center & Area Layanan Disabilitas\n- Kursi, Papan Tulis, & AC (Existing)\n- 2 pcs Bean Bag ukuran L\n- 1 pc Karpet tebal anti-slip (2x3 meter)\n- 2 pcs Meja lipat lesehan kayu\n- Papan akrilik penanda (Signage)",
+            'description' => "Ruang berkonsep Accessible & Professional. Menggabungkan area formal dan lesehan untuk konsultasi pajak (Tax Center) serta ruang gerak lega yang ramah disabilitas.",
+            'facilities' => "AC, Papan Tulis, Kursi, Area Tax Center, Area Disabilitas, Bean Bags, Karpet Anti-Slip, Meja Lipat Lesehan.",
             'is_active' => true,
         ]);
 
         Laboratory::create([
             'name' => 'Laboratorium Pemasaran',
-            'location' => 'Gedung FEB UMPRI',
+            'location' => 'Lantai 3 Gedung FEB UMPRI',
             'capacity' => 25,
-            'description' => "Konsep: Creative Hub & Mini Studio (Co-Working & Living Space)\n\nRuangan yang dinamis dirancang untuk merangsang ide, membuat konten (content creation), dan memamerkan prototype produk mahasiswa.\n\nPembagian Area:\n- Zona Formal: Menggunakan kursi dan papan tulis yang sudah ada untuk materi, rapat, atau kerja fokus.\n- Zona Kolaborasi (Lesehan): Content Creation Corner (sudut studio mini untuk foto/video atau live streaming) dan Idea Space (area bean bags untuk mencari inspirasi dan brainstorming kampanye pemasaran).",
-            'facilities' => "Fasilitas & Penunjang:\n- Content Creation Corner & Idea Space\n- Kursi, Papan Tulis, & AC (Existing)\n- 2 pcs Bean Bag ukuran L\n- 1 pc Karpet estetis/bulu rasfur (2x3 meter)\n- 1 set Background Stand + Kain Green Screen\n- 1 pc Ring Light + Tripod\n- Hiasan dinding / Poster motivasi marketing",
+            'description' => "Creative Hub & Mini Studio yang dinamis. Dirancang untuk mencari inspirasi, pembuatan konten kreatif (foto/video), dan presentasi produk pemasaran.",
+            'facilities' => "AC, Papan Tulis, Kursi, Content Creation Corner, Idea Space, Bean Bags, Karpet Rasfur, Green Screen, Ring Light.",
             'is_active' => true,
         ]);
 
         Laboratory::create([
             'name' => 'Laboratorium Sumber Daya Manusia (SDM)',
-            'location' => 'Gedung FEB UMPRI',
+            'location' => 'Lantai 3 Gedung FEB UMPRI',
             'capacity' => 25,
-            'description' => "Konsep: FGD & Roleplay Room (Co-Working & Living Space)\n\nRuangan hangat yang dirancang khusus untuk simulasi wawancara kerja, pelatihan (training), dan diskusi kelompok.\n\nPembagian Area:\n- Zona Formal: Menggunakan kursi dan papan tulis yang sudah ada untuk materi, rapat, atau kerja fokus.\n- Zona Kolaborasi (Lesehan): Interview Corner (sudut simulasi wawancara kerja menggunakan kursi existing) dan FGD Circle (area melingkar di atas karpet untuk diskusi pemecahan masalah SDM).",
-            'facilities' => "Fasilitas & Penunjang:\n- Interview Corner & FGD Circle\n- Kursi, Papan Tulis, & AC (Existing)\n- 3 pcs Bean Bag ukuran M/L\n- 1 pc Karpet busa tebal (2x3 meter)\n- 1 pc Corkboard / Papan Mading\n- 2 pcs Meja bundar lesehan",
+            'description' => "FGD & Roleplay Room bernuansa hangat. Berfokus pada kolaborasi, sangat cocok untuk simulasi wawancara kerja, pelatihan, dan diskusi kelompok (FGD).",
+            'facilities' => "AC, Papan Tulis, Kursi, Interview Corner, FGD Circle, Bean Bags, Karpet Busa, Papan Mading, Meja Bundar.",
             'is_active' => true,
         ]);
     }
