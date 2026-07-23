@@ -83,26 +83,26 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-600">
                 <!-- Kiri: Deskripsi -->
                 <div class="space-y-3">
-                    <h3 class="text-xl font-bold text-gray-900 border-b pb-2">Deskripsi</h3>
-                    <p class="leading-relaxed text-gray-700 text-lg">{{ $laboratory->description ?? 'Tidak ada deskripsi.' }}</p>
+                    <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Deskripsi</h3>
+                    <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line">{{ $laboratory->description ?? 'Tidak ada deskripsi.' }}</p>
                 </div>
 
                 <!-- Kanan: Fasilitas & Detail -->
                 <div class="flex flex-col justify-between space-y-6">
                     <div class="space-y-3">
-                        <h3 class="text-xl font-bold text-gray-900 border-b pb-2">Fasilitas</h3>
-                        <p class="leading-relaxed text-gray-700">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
+                        <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Fasilitas</h3>
+                        <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
                     </div>
 
                     <!-- Kapasitas dan Lokasi -->
                     <div class="grid grid-cols-2 gap-6 mt-auto pt-4">
                         <div>
-                            <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
-                            <span class="font-medium text-gray-900 text-lg">{{ $laboratory->capacity }} Orang</span>
+                            <span class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
+                            <span class="font-medium text-gray-900 text-base">{{ $laboratory->capacity }} Orang</span>
                         </div>
                         <div>
-                            <span class="block text-sm font-semibold text-gray-500 mb-1 uppercase tracking-wider">Lokasi</span>
-                            <span class="font-medium text-gray-900 text-lg">{{ $laboratory->location ?? '-' }}</span>
+                            <span class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Lokasi</span>
+                            <span class="font-medium text-gray-900 text-base">{{ $laboratory->location ?? '-' }}</span>
                         </div>
                     </div>
                 </div>

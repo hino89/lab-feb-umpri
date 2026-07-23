@@ -38,7 +38,7 @@ class LabSeeder extends Seeder
             'name' => 'Laboratorium Sumber Daya Manusia (SDM)',
             'location' => 'Lantai 3 Gedung FEB UMPRI',
             'capacity' => 25,
-            'description' => "FGD & Roleplay Room bernuansa hangat. Berfokus pada kolaborasi, sangat cocok untuk simulasi wawancara kerja, pelatihan, dan diskusi kelompok (FGD).",
+            'description' => "FGD & Ruang Simulasi bernuansa hangat. Berfokus pada kolaborasi, sangat cocok untuk simulasi wawancara kerja, pelatihan, dan diskusi kelompok (FGD).",
             'facilities' => "AC, Papan Tulis, Kursi, Interview Corner, FGD Circle, Bean Bags, Karpet Busa, Papan Mading, Meja Bundar.",
             'is_active' => true,
         ]);
