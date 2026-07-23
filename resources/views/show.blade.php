@@ -84,25 +84,25 @@
                 <!-- Kiri: Deskripsi -->
                 <div class="space-y-3">
                     <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Deskripsi</h3>
-                    <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line">{{ $laboratory->description ?? 'Tidak ada deskripsi.' }}</p>
+                    <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line text-justify">{{ $laboratory->description ?? 'Tidak ada deskripsi.' }}</p>
                 </div>
 
                 <!-- Kanan: Fasilitas & Detail -->
                 <div class="flex flex-col justify-between space-y-6">
                     <div class="space-y-3">
                         <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Fasilitas</h3>
-                        <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
+                        <p class="leading-relaxed text-gray-700 text-sm whitespace-pre-line text-justify">{{ $laboratory->facilities ?? 'Tidak ada fasilitas.' }}</p>
                     </div>
 
                     <!-- Kapasitas dan Lokasi -->
                     <div class="grid grid-cols-2 gap-6 mt-auto pt-4">
                         <div>
                             <span class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Kapasitas</span>
-                            <span class="font-medium text-gray-900 text-base">{{ $laboratory->capacity }} Orang</span>
+                            <span class="font-medium text-gray-900 text-sm">{{ $laboratory->capacity }} Orang</span>
                         </div>
                         <div>
                             <span class="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Lokasi</span>
-                            <span class="font-medium text-gray-900 text-base">{{ $laboratory->location ?? '-' }}</span>
+                            <span class="font-medium text-gray-900 text-sm">{{ $laboratory->location ?? '-' }}</span>
                         </div>
                     </div>
                 </div>
