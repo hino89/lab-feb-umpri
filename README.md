@@ -83,9 +83,8 @@ erDiagram
 
 
 ### Akun Bawaan (Default Credentials)
-Untuk percobaan/login pertama kali ke `/portal-admin-rahasia`, gunakan:
-- **Email:** `admin@umpri.ac.id`
-- **Password:** `password`
+Demi alasan keamanan, URL akses ke portal administrator serta *username/password* bawaan sistem tidak dipublikasikan secara umum di repositori ini. 
+Silakan hubungi pihak pengembang atau periksa dokumen *Handover* internal untuk mendapatkan akses otentikasi awal.
 
 ### Letak Penyimpanan File & Gambar (Storage)
 Semua file yang diunggah dikelola dengan sistem symlink bawaan Laravel. Letak penyimpanan fisik berada di:
