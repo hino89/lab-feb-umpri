@@ -15,12 +15,10 @@ use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admin\HeroSettingController;
 
-// Admin Auth Routes
-Route::prefix('admin')->group(function () {
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('login', [AuthController::class, 'login'])->name('admin.login.post');
-    Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
-});
+// Admin Auth Routes (Hidden Path)
+Route::get('portal-admin-rahasia', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('portal-admin-rahasia', [AuthController::class, 'login'])->name('admin.login.post');
+Route::post('admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 // Admin Protected Routes
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {

@@ -27,10 +27,8 @@
                     <span class="font-bold text-lg md:text-lg tracking-tight text-white sm:block whitespace-nowrap">Laboratorium Fakultas Ekonomi dan Bisnis</span>
                 </div>
                 
-                <!-- Kanan (Login) -->
-                <div class="flex-1 flex justify-end">
-                    <a href="{{ route('admin.login') }}" class="text-sm text-gray-200 hover:text-white transition whitespace-nowrap">Login Admin</a>
-                </div>
+                <!-- Kanan (Login) disembunyikan -->
+                <div class="flex-1 flex justify-end"></div>
             </div>
         </div>
     </nav>

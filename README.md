@@ -83,7 +83,7 @@ erDiagram
 
 
 ### Akun Bawaan (Default Credentials)
-Untuk percobaan/login pertama kali ke `/login`, gunakan:
+Untuk percobaan/login pertama kali ke `/portal-admin-rahasia`, gunakan:
 - **Email:** `admin@umpri.ac.id`
 - **Password:** `password`
 
