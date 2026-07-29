@@ -27,9 +27,9 @@ Sistem dibagi menjadi 2 (dua) sisi utama, yaitu **Sisi Publik (Pengguna/Mahasisw
 ### Sisi Admin (Memerlukan Login)
 | Fitur / Halaman | Deskripsi |
 | --- | --- |
-| **Dashboard** | Statistik Laboratorium, peminjaman, dan pengguna. Dilengkapi tabel **Live Peminjaman Terbaru** yang *auto-refresh* setiap 10 detik dengan lencana "Live" berkedip. |
+| **Dashboard** | Statistik Laboratorium, peminjaman, dan pengguna. Dilengkapi tabel **Live Peminjaman Terbaru** yang *auto-refresh* setiap 10 detik dengan lencana "Live" berkedip (menggunakan sistem *AlpineJS HTTP Polling*). |
 | **Manajemen Laboratorium** | Mengedit data lab (Nama, Deskripsi, Fasilitas, Lokasi, Kapasitas) dan mengelola galeri foto untuk masing-masing lab (*multiple upload*). |
-| **Manajemen Peminjaman** | Menerima pengajuan jadwal dan memberikan status (Disetujui/Ditolak). Mendukung *Live Polling/Auto-refresh* setiap 10 detik. |
+| **Manajemen Peminjaman** | Menerima pengajuan jadwal dan memberikan status (Disetujui/Ditolak). Mendukung *Live Polling/Auto-refresh* (sistem *polling* periodik 10 detik) untuk memuat data peminjaman terbaru secara otomatis. |
 | **Pengaturan Beranda** | Upload dan kelola 3 gambar utama (*Hero Image*) untuk *Homepage*. |
 | **Manajemen Pengguna** | Menambah, mengubah, dan menghapus hak akses Admin lainnya. Sistem terkunci secara bawaan untuk hanya memiliki *role* Admin. |
 
