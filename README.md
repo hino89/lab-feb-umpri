@@ -17,43 +17,69 @@ Sistem ini dibangun menggunakan teknologi modern yang berfokus pada kecepatan, k
 Sistem dibagi menjadi 2 (dua) sisi utama, yaitu **Sisi Publik (Pengguna/Mahasiswa/Dosen)** dan **Sisi Admin**.
 
 ### Sisi Publik (Tidak perlu login)
-1. **Beranda Dinamis**
-   - Menampilkan *Hero Image* (3 gambar _split diagonal_) yang bisa dikustomisasi secara *real-time* oleh Admin.
-   - Daftar 3 Laboratorium utama (Laboratorium Keuangan, Pemasaran, dan SDM) dalam bentuk kartu interaktif.
-2. **Detail Laboratorium**
-   - Menampilkan gambar-gambar ruangan dalam bentuk *Slider/Lightbox Carousel*.
-   - Menyajikan informasi detail, deskripsi, lokasi, dan fasilitas ruang dengan rapi (*text-justify*).
-3. **Jadwal Penggunaan (Live & Filterable)**
-   - Menampilkan jadwal peminjaman yang *sudah disetujui* (Approved).
-   - Terdapat filter tanggal tanpa *full page reload* (menggunakan *AlpineJS fetch DOM replacement*).
-4. **Formulir Pengajuan (Booking)**
-   - Form _booking_ langsung di halaman detail lab. Meminta nama, NIM/NIDN, status (Mahasiswa/Dosen), tanggal penggunaan, jam mulai/selesai, dan tujuan/keperluan.
+| Fitur / Halaman | Deskripsi |
+| --- | --- |
+| **Beranda Dinamis** | Menampilkan *Hero Image* (3 gambar *split diagonal*) yang dikustomisasi secara *real-time* oleh Admin. Berisi daftar 3 Laboratorium utama dalam bentuk kartu interaktif. |
+| **Detail Laboratorium** | Menampilkan gambar ruangan (*Lightbox Carousel*), menyajikan informasi detail, deskripsi, lokasi, dan fasilitas ruang dengan rapi (*text-justify*). |
+| **Jadwal Penggunaan** | Menampilkan jadwal peminjaman yang *sudah disetujui* dengan filter tanggal tanpa *full page reload* (menggunakan *AlpineJS fetch DOM replacement*). |
+| **Formulir Booking** | Meminta data nama, NIM/NIDN, status (Mahasiswa/Dosen), tanggal penggunaan, jam, dan keperluan secara langsung di halaman detail lab. |
 
 ### Sisi Admin (Memerlukan Login)
-1. **Dashboard**
-   - Statistik jumlah Laboratorium, total peminjaman, dan jumlah pengguna (Admin).
-   - **Live Peminjaman Terbaru:** Tabel yang akan _auto-refresh_ setiap 10 detik tanpa *reload* halaman. Dilengkapi lencana/indikator "Live" berkedip.
-2. **Manajemen Laboratorium**
-   - Mengedit data lab (Nama, Deskripsi, Fasilitas, Lokasi, Kapasitas).
-   - Mengunggah / Menghapus galeri foto untuk masing-masing lab (mendukung *multiple upload*).
-3. **Manajemen Peminjaman (Booking)**
-   - Menerima dan melihat detail jadwal masuk (Status awal: Menunggu).
-   - Admin dapat mengeklik tombol "Setujui" (Approved) atau "Tolak" (Rejected).
-   - Halaman daftar peminjaman juga mendukung *Live Polling/Auto-refresh* setiap 10 detik.
-4. **Pengaturan Beranda**
-   - Upload dan kelola 3 gambar utama (*Hero Image*) yang tampil di *Homepage*. Jika kosong, sistem otomatis memanggil _placeholder_ (abu-abu).
-5. **Manajemen Pengguna (Admin)**
-   - Menambah, mengubah, dan menghapus hak akses Admin lainnya. Sistem telah dikunci sehingga hanya role **admin** yang berlaku (tanpa role *user biasa* karena publik tidak perlu login).
+| Fitur / Halaman | Deskripsi |
+| --- | --- |
+| **Dashboard** | Statistik Laboratorium, peminjaman, dan pengguna. Dilengkapi tabel **Live Peminjaman Terbaru** yang *auto-refresh* setiap 10 detik dengan lencana "Live" berkedip. |
+| **Manajemen Laboratorium** | Mengedit data lab (Nama, Deskripsi, Fasilitas, Lokasi, Kapasitas) dan mengelola galeri foto untuk masing-masing lab (*multiple upload*). |
+| **Manajemen Peminjaman** | Menerima pengajuan jadwal dan memberikan status (Disetujui/Ditolak). Mendukung *Live Polling/Auto-refresh* setiap 10 detik. |
+| **Pengaturan Beranda** | Upload dan kelola 3 gambar utama (*Hero Image*) untuk *Homepage*. |
+| **Manajemen Pengguna** | Menambah, mengubah, dan menghapus hak akses Admin lainnya. Sistem terkunci secara bawaan untuk hanya memiliki *role* Admin. |
 
 ---
 
 ## 💾 Struktur Database
 
-Sistem ini memiliki tabel-tabel esensial sebagai berikut:
-- `users`: Menyimpan data akses login (Nama, Email, Password). Sistem me-*lock* semuanya sebagai Admin.
-- `laboratories`: Menyimpan data referensi lab (id, nama, lokasi, kapasitas, deskripsi, fasilitas, is_active).
-- `laboratory_images`: Menghubungkan ID lab dengan *path* gambar yang diupload ke *storage*.
-- `bookings`: Menyimpan jejak pengajuan peminjaman (id, laboratory_id, booker_name, booker_id, booker_type, purpose, start_time, end_time, status).
+Berikut adalah relasi dan struktur tabel di dalam *database* sistem ini:
+
+```mermaid
+erDiagram
+    USERS {
+        bigint id PK
+        string name
+        string email
+        string password
+    }
+    
+    LABORATORIES {
+        bigint id PK
+        string name
+        string location
+        integer capacity
+        text description
+        text facilities
+        boolean is_active
+    }
+    
+    LABORATORY_IMAGES {
+        bigint id PK
+        bigint laboratory_id FK
+        string image_path
+    }
+    
+    BOOKINGS {
+        bigint id PK
+        bigint laboratory_id FK
+        string booker_name
+        string booker_id
+        string booker_type
+        string purpose
+        datetime start_time
+        datetime end_time
+        string status
+    }
+
+    LABORATORIES ||--o{ LABORATORY_IMAGES : "memiliki"
+    LABORATORIES ||--o{ BOOKINGS : "dipesan melalui"
+```
+
 
 ### Akun Bawaan (Default Credentials)
 Untuk percobaan/login pertama kali ke `/login`, gunakan:
