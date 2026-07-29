@@ -40,6 +40,7 @@ Sistem dibagi menjadi 2 (dua) sisi utama, yaitu **Sisi Publik (Pengguna/Mahasisw
 Berikut adalah relasi dan struktur tabel di dalam *database* sistem ini:
 
 ```mermaid
+%%{init: {'theme': 'default'}}%%
 erDiagram
     USERS {
         bigint id PK
