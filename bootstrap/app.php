@@ -20,4 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
+        $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, Request $request) {
+            if ($request->is('admin') || $request->is('admin/*')) {
+                abort(403, 'Access Denied.');
+            }
+        });
     })->create();
