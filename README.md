@@ -2,7 +2,7 @@
 
 Sistem Informasi Manajemen Peminjaman Laboratorium khusus untuk Fakultas Ekonomi dan Bisnis (FEB) Universitas Muhammadiyah Pringsewu (UMPRI). Sistem ini dikembangkan untuk memudahkan mahasiswa dan dosen dalam memesan (booking) ruang laboratorium, serta memudahkan admin/petugas dalam mengelola persetujuan peminjaman, data laboratorium, dan konten website.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 Sistem ini dibangun menggunakan teknologi modern yang berfokus pada kecepatan, keamanan, dan kemudahan _maintenance_:
 - **Framework Utama:** Laravel 13 (PHP 8.3+)
@@ -12,7 +12,7 @@ Sistem ini dibangun menggunakan teknologi modern yang berfokus pada kecepatan, k
 
 ---
 
-## 📌 Fitur dan Menu Sistem
+## Fitur dan Menu Sistem
 
 Sistem dibagi menjadi 2 (dua) sisi utama, yaitu **Sisi Publik (Pengguna/Mahasiswa/Dosen)** dan **Sisi Admin**.
 
@@ -35,7 +35,7 @@ Sistem dibagi menjadi 2 (dua) sisi utama, yaitu **Sisi Publik (Pengguna/Mahasisw
 
 ---
 
-## 💾 Struktur Database
+## Struktur Database
 
 Berikut adalah relasi dan struktur tabel di dalam *database* sistem ini:
 
@@ -96,7 +96,7 @@ Semua file yang diunggah dikelola dengan sistem symlink bawaan Laravel. Letak pe
 
 ---
 
-## 🚀 Panduan Setup & Deployment Server
+## Panduan Setup & Deployment Server
 
 Sistem ini dapat dijalankan pada **Server Fisik (Dedicated)** maupun **VPS**. Mengingat potensi penggunaan Web Server **LiteSpeed / OpenLiteSpeed** atau **Apache/Nginx**, ikuti petunjuk berikut:
 
@@ -109,7 +109,7 @@ Pastikan server memiliki:
 ### 2. Instalasi (Clone & Dependencies)
 1. Unggah *Source Code* atau clone dari repository Git ke direktori server (contoh: `/var/www/lab-feb-umpri` atau di `/home/user/public_html/lab-feb-umpri`).
 2. Masuk ke direktori tersebut lewat terminal (SSH) dan jalankan:
-   ```bash
+   ```sh
    composer install --optimize-autoloader --no-dev
    ```
 
@@ -122,21 +122,21 @@ Pastikan server memiliki:
 
 ### 4. Migrasi & Seed Database
 Jalankan migrasi tabel beserta *seeder* awal (untuk membuat 3 lab FEB UMPRI dan akun admin default):
-```bash
+```sh
 php artisan migrate --seed
 php artisan db:seed --class=LabSeeder
 ```
 
 ### 5. Membuat Storage Link (Penting untuk Gambar)
 Agar file yang diupload ke direktori `/storage/app/public/` bisa diakses melalui web browser, jalankan:
-```bash
+```sh
 php artisan storage:link
 ```
 *(Jika di shared hosting cPanel/LiteSpeed artisan tidak bisa dijalankan, Anda bisa membuat symlink manual atau letakkan script php kecil berisi `Artisan::call('storage:link')` di route).*
 
 ### 6. Build Aset Frontend (Tailwind CSS)
 Sistem ini menggunakan kelas-kelas *Tailwind JIT* yang *dynamic*. Jika Anda baru mengubah file `.blade.php` di server (tidak disarankan), jalankan perintah:
-```bash
+```sh
 npm install
 npm run build
 ```
@@ -161,9 +161,9 @@ Atau lebih disarankan meng-_create symlink_ dari `/public` ke public root direkt
 
 ### 8. Hak Akses (Permissions)
 Pastikan web server (pengguna `www-data` atau `nobody` atau *user-panel* Anda) memiliki akses tulis ke folder `storage` dan `bootstrap/cache`:
-```bash
+```sh
 chmod -R 775 storage bootstrap/cache
 chown -R $USER:www-data storage bootstrap/cache
 ```
 
-Sekarang sistem Anda sudah siap diakses secara online! 🎉
+Sekarang sistem Anda sudah siap diakses secara online!
